@@ -1,133 +1,122 @@
-import './App.css';
-import { useState } from 'react';
+//import "./App.css";
 
-function App() {
-  const [list, setList] = useState([]);
+// import { useState } from 'react';
+// import AddTasks from './Components/AddTasks';
+// import ListTasks from './Components/ListTasks';
+
+// function App() {
+//   const [tasks, setTasks] = useState([]);
+
+//   return (
+//     <div>
+//     <h1>Retro Board</h1>
+
+//     <AddTasks tasks={tasks} setTasks={setTasks} />
+//     <ListTasks tasks={tasks} setTasks={setTasks} />
+//     </div>
+//   );
+// }
+
+import { useState } from "react";
+import "./App.css";
+
+const App = () => {
  
-  const [name, setName] = useState("");
+  const [tasks, setTasks] = useState([]);
+ 
+  const [nameOfTask, setNameOfTask] = useState("");
+ 
+  const [hasError, setHasError] = useState(false);
 
-  const [cost, setCost] = useState("");
+  const addToList = () => {
+ 
+    setTasks([
+      ...tasks,
+      {
+        nameOfTask,
+      },
+    ]);
+    setNameOfTask("");
+  };
+
+  const deleteFromList = (indexToDelete) => {
+    setTasks(
+      [...tasks].filter((_, index) => index !== indexToDelete)
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   
+    if (nameOfTask) {
+      addToList();
+      setHasError(false);
+    } else setHasError(true);
+  };
 
   return (
-         //<!-- Layout changer -->
-         <div class="content row">
-           <button type="submit" className="btn btn-success">Column</button>
-         </div>
- 
-         //<!-- The class "row" is for the layout changer -->
-         <div class="RetroApp row">
-           <!-- Retro category -->
-           <div class="RetroCategory RetroCategory-1">
-             <h2>Went Well</h2>
-             //<!-- Add a new card button -->
-             <button
-               type="button"
-               class="ButtonAdd button button-default"
-               aria-label="Add new card"
-               title="Add new card"
-             >
-               +
-             </button>
- 
-             <!-- A retro card (retrospective item) -->
-             <div class="RetroCard" aria-label="Retro card">
-               <!-- User input -->
-               <textarea
-                 class="textbox"
-                 placeholder="Enter text here"
-                 aria-label="Enter text here"
-                 rows="1"
-                 value="Here is an example card"
-               >
-               </textarea>
- 
-               <div class="button-group">
-                 <button
-                   type="button"
-                   class="button button-left"
-                   title="Move left"
-                 >
-                   <img
-                     src="angleLeft.svg"
-                     alt="Move left"
-                     width="12"
-                     height="12"
-                   />
-                 </button>
-                 <button
-                   type="button"
-                   class="button button-delete"
-                   title="Delete"
-                 >
-                   <img
-                     src="timesCircle.svg"
-                     alt="Delete"
-                     width="12"
-                     height="12"
-                   />
-                 </button>
-                 <div>
-                   <button type="button" class="button button-left" title="Like">
-                     <img src="thumbsUp.svg" alt="Like" width="12" height="12" />
-                     5
-                   </button>
-                   <button
-                     type="button"
-                     class="button button-left"
-                     title="Dislike"
-                   >
-                     <img
-                       src="thumbsDown.svg"
-                       alt="Dislike"
-                       width="12"
-                       height="12"
-                     />
-                     0
-                   </button>
-                   <button
-                     type="button"
-                     class="button button-right"
-                     title="Move right"
-                   >
-                     <img
-                       src="angleRight.svg"
-                       alt="Move right"
-                       width="12"
-                       height="12"
-                     />
-                   </button>
-                 </div>
-               </div>
-             </div>
-           </div>
- 
-           <!-- Retro category -->
-           <div class="RetroCategory RetroCategory-2">
-             <h2>To Improve</h2>
-             <button
-               type="button"
-               class="ButtonAdd button button-default"
-               aria-label="Add to new card"
-               title="Add to new card"
-             >
-               +
-             </button>
-           </div>
- 
-           <!-- Retro category -->
-           <div class="RetroCategory RetroCategory-3">
-             <h2>Action Items</h2>
-             <button
-               type="button"
-               class="ButtonAdd button button-default"
-               aria-label="Add to new card"
-               title="Add to new card"
-             >
-               +
-             </button>
-           </div>
-         </div>
+    <div className="container">
+      <div className="card card-body bg-light mb-2">
+        <form method="POST" className="row g-3" onSubmit={handleSubmit}>
+          <div className="col">
+            <input
+              className={
+                hasError && !nameOfTask ? "is-invalid form-control" : "form-control"
+              }
+              type="text"
+              placeholder="Name of Task"
+              aria-label="Name of Task"
+              value={nameOfTask}
+              onChange={(e) => setNameOfTask(e.target.value)}
+            />
+            {hasError && !nameOfTask && (
+              <div className="invalid-feedback">
+                Please enter a Task
+              </div>
+            )}
+          </div>
+     
+          <div className="col-md-auto">
+            <button type="submit" className="btn btn-success">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+      <div className="card card-body border-white">
+        <h1 className="h4">Retro Board</h1>
+        <table className="table table-sm">
+          <thead>
+            <tr>
+              <th>Went Well</th>
+              <th>To Improve</th>
+              <th>Action Items</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((item, index) => {
+              return (
+                <tr key={`item-${index}`}>
+                  <td>{item.nameOfTask}</td>
+                  <td>${item.cost.toFixed(2)}</td>
+                  <td>
+                    <button
+                      aria-label="Delete"
+                      title="Delete"
+                      className="btn"
+                      onClick={() => deleteFromList(index)}
+                    >
+                      &times;
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
-}
+};
 
 export default App;
