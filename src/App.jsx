@@ -24,7 +24,9 @@ const App = () => {
  
   const [tasks, setTasks] = useState([]);
  
-  const [nameOfTask, setNameOfTask] = useState("");
+  const [wentWell, setWentWell] = useState("");
+  const [toImprove, setToImprove] = useState("");
+  const [actionItem, setActionItem] = useState("");
  
   const [hasError, setHasError] = useState(false);
 
@@ -33,10 +35,10 @@ const App = () => {
     setTasks([
       ...tasks,
       {
-        nameOfTask,
+        wentWell,
       },
     ]);
-    setNameOfTask("");
+    setWentWell("");
   };
 
   const deleteFromList = (indexToDelete) => {
@@ -48,7 +50,7 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
    
-    if (nameOfTask) {
+    if (wentWell) {
       addToList();
       setHasError(false);
     } else setHasError(true);
@@ -61,15 +63,15 @@ const App = () => {
           <div className="col">
             <input
               className={
-                hasError && !nameOfTask ? "is-invalid form-control" : "form-control"
+                hasError && !wentWell ? "is-invalid form-control" : "form-control"
               }
               type="text"
               placeholder="Name of Task"
               aria-label="Name of Task"
-              value={nameOfTask}
-              onChange={(e) => setNameOfTask(e.target.value)}
+              value={wentWell}
+              onChange={(e) => setWentWell(e.target.value)}
             />
-            {hasError && !nameOfTask && (
+            {hasError && !wentWell && (
               <div className="invalid-feedback">
                 Please enter a Task
               </div>
@@ -97,8 +99,9 @@ const App = () => {
             {tasks.map((item, index) => {
               return (
                 <tr key={`item-${index}`}>
-                  <td>{item.nameOfTask}</td>
-                  <td>${item.cost.toFixed(2)}</td>
+                  <td>{item.wentWell}</td>
+                  <td>{item.toImprove}</td>
+                  <td>{item.actionItem}</td>
                   <td>
                     <button
                       aria-label="Delete"
