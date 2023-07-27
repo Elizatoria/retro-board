@@ -1,10 +1,8 @@
 import { useState } from "react";
 
-// import Likes from "./Likes";
-// import Dislikes from "./Dislikes";
 import { Likes, Dislikes } from "./(Dis)likes";
 
-const WentWell = () => {
+const ActionItems = () => {
  
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
@@ -41,7 +39,7 @@ const WentWell = () => {
       <div className="card card-body bg-light mb-2">
         <form method="POST" className="row g-3" onSubmit={handleSubmit}>
           <div className="col">
-          <h2 className="h4">Went Well</h2>
+          <h2 className="h4">Action Items</h2>
             <input
               className={
                 hasError && !newItem ? "is-invalid form-control" : "form-control"
@@ -83,4 +81,4 @@ const WentWell = () => {
   );
 };
 
-export default WentWell;
+export default ActionItems;

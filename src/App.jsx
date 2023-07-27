@@ -2,7 +2,8 @@
 import "./App.css";
 
 import WentWell from "./Components/WentWell";
-import Improve from "./Components/Improve";
+import ToImprove from "./Components/ToImprove";
+import ActionItems from "./Components/ActionItems";
 
 function App() {
 
@@ -13,14 +14,19 @@ function App() {
     <h1>Retro Board</h1>
     </div>
 
-    <div className="app">
+<div className="app">
+    <div className="box">
       <WentWell />
     </div>
 
-    <div className="app">
-      <Improve />
+    <div className="box">
+      <ToImprove />
     </div>
 
+    <div className="box">
+      <ActionItems />
+    </div>
+</div>
     </div>
     </div>
   );
