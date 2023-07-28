@@ -3,6 +3,7 @@ import { useState } from "react";
 // import Likes from "./Likes";
 // import Dislikes from "./Dislikes";
 import { Likes, Dislikes } from "./(Dis)likes";
+import DragandDrop from "./drag";
 
 const WentWell = () => {
  
@@ -36,12 +37,24 @@ const WentWell = () => {
     } else setHasError(true);
   };
 
+  // const OnDragStart = (e.DragEventHandler.HTMLDivElement, index) => {
+  //   console.log("Drag Start", index);
+  // }
+  // const OnDragEnter = (e:DragEvent<HTMLDivElement>, index) => {
+  //   console.log("Drag Enter", index)
+  // }
+  // const OnDragEnd = (e:DragEvent<HTMLDivElement>, index) => {
+  //   console.log("Drag End", index)
+  // }
+//   function handleDrag() {
+//     console.log("Dragging...")
+// }
+
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
         <form method="POST" className="row g-3" onSubmit={handleSubmit}>
           <div className="col">
-          <h2 className="h4">Went Well</h2>
             <input
               className={
                 hasError && !newItem ? "is-invalid form-control" : "form-control"
@@ -54,7 +67,7 @@ const WentWell = () => {
             />
             {hasError && !newItem && (
               <div className="invalid-feedback">
-                Please enter a Task
+                Please enter a Text
               </div>
             )}
             
@@ -69,7 +82,11 @@ const WentWell = () => {
         <ul>
         {items.map((item, index) => {
           return (
-            <li key={`item-${index}`}>
+            <li key={`item-${index}`} draggable className="task swim-lane" onDrag={DragandDrop} onDrop={DragandDrop}
+            // onDragStart={(e) => onDragStart(e, index)}
+            // onDragEnter={(e) => onDragEnter(e, index)}
+            // onDragEnd={onDragEnd}
+            >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
               <Likes /> <Dislikes />

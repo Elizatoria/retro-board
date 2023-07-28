@@ -2,8 +2,8 @@
 import "./App.css";
 
 import WentWell from "./Components/WentWell";
-import ToImprove from "./Components/ToImprove";
-import ActionItems from "./Components/ActionItems";
+// import ToImprove from "./Components/ToImprove";
+// import ActionItems from "./Components/ActionItems";
 
 function App() {
 
@@ -16,15 +16,20 @@ function App() {
 
 <div className="app">
     <div className="box">
+      <h2>Went Well</h2>
       <WentWell />
     </div>
 
     <div className="box">
-      <ToImprove />
+      {/* <ToImprove /> */}
+      <h2>To Improve</h2>
+      <WentWell />
     </div>
 
     <div className="box">
-      <ActionItems />
+      {/* <ActionItems /> */}
+      <h2>Action Items</h2>
+      <WentWell />
     </div>
 </div>
     </div>
