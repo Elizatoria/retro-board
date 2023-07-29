@@ -3,7 +3,7 @@ import { useState } from "react";
 // import Likes from "./Likes";
 // import Dislikes from "./Dislikes";
 import { Likes, Dislikes } from "./(Dis)likes";
-import DragandDrop from "./drag";
+//import {DragStart, DragOver, insertAboveTask} from "./drag";
 
 const WentWell = () => {
  
@@ -82,7 +82,10 @@ const WentWell = () => {
         <ul>
         {items.map((item, index) => {
           return (
-            <li key={`item-${index}`} draggable className="task swim-lane" onDrag={DragandDrop} onDrop={DragandDrop}
+            <li key={`item-${index}`} draggable className="task swim-lane" 
+            // onDrag={DragStart} onDrop={DragOver} onDropCapture={insertAboveTask}
+            // onDrag={handleDrag}
+            // onDrag={DragandDrop} onDrop={DragandDrop}
             // onDragStart={(e) => onDragStart(e, index)}
             // onDragEnter={(e) => onDragEnter(e, index)}
             // onDragEnd={onDragEnd}

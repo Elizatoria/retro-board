@@ -1,34 +1,34 @@
-import React from 'react';
+// import React from 'react';
 
-const DragAndDrop = props => {
-  const handleDragEnter = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-  const handleDragLeave = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-  const handleDragOver = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-  const handleDrop = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-  return (
-    <div className={'drag-drop-zone'}
-      onDrop={e => handleDrop(e)}
-      onDragOver={e => handleDragOver(e)}
-      onDragEnter={e => handleDragEnter(e)}
-      onDragLeave={e => handleDragLeave(e)}
-    >
-      <p>Drag files here to upload</p>
-    </div>
-  );
-};
-export default DragAndDrop;
+// const DragAndDrop = props => {
+//   const handleDragEnter = e => {
+//     e.preventDefault();
+//     e.stopPropagation();
+//   };
+//   const handleDragLeave = e => {
+//     e.preventDefault();
+//     e.stopPropagation();
+//   };
+//   const handleDragOver = e => {
+//     e.preventDefault();
+//     e.stopPropagation();
+//   };
+//   const handleDrop = e => {
+//     e.preventDefault();
+//     e.stopPropagation();
+//   };
+//   return (
+//     <div className={'drag-drop-zone'}
+//       onDrop={e => handleDrop(e)}
+//       onDragOver={e => handleDragOver(e)}
+//       onDragEnter={e => handleDragEnter(e)}
+//       onDragLeave={e => handleDragLeave(e)}
+//     >
+//       <p>Drag files here to upload</p>
+//     </div>
+//   );
+// };
+// export default DragAndDrop;
 
 // import { useState } from "react";
 
@@ -172,8 +172,11 @@ export default DragAndDrop;
 //   });
 //  }
 
-// export const draggables = document.querySelectorAll(".task");
-// export const droppables = document.querySelectorAll(".swim-lane");
+
+// const draggables = document.querySelectorAll(".task");
+// const droppables = document.querySelectorAll(".swim-lane");
+
+// export const DragStart = () => {
 
 // draggables.forEach((task) => {
 //   task.addEventListener("dragstart", () => {
@@ -183,6 +186,10 @@ export default DragAndDrop;
 //     task.classList.remove("is-dragging");
 //   });
 // });
+
+// }
+
+// export const DragOver = () => {
 
 // droppables.forEach((zone) => {
 //   zone.addEventListener("dragover", (e) => {
@@ -199,7 +206,9 @@ export default DragAndDrop;
 //   });
 // });
 
-// const insertAboveTask = (zone, mouseY) => {
+// }
+
+// export const insertAboveTask = (zone, mouseY) => {
 //   const els = zone.querySelectorAll(".task:not(.is-dragging)");
 
 //   let closestTask = null;
