@@ -1,9 +1,6 @@
-import { useState } from "react";
-
-// import Likes from "./Likes";
-// import Dislikes from "./Dislikes";
+import { useState, useRef } from "react";
 import { Likes, Dislikes } from "./(Dis)likes";
-//import {DragStart, DragOver, insertAboveTask} from "./drag";
+
 
 const WentWell = () => {
  
@@ -37,18 +34,17 @@ const WentWell = () => {
     } else setHasError(true);
   };
 
-  // const OnDragStart = (e.DragEventHandler.HTMLDivElement, index) => {
-  //   console.log("Drag Start", index);
-  // }
-  // const OnDragEnter = (e:DragEvent<HTMLDivElement>, index) => {
-  //   console.log("Drag Enter", index)
-  // }
-  // const OnDragEnd = (e:DragEvent<HTMLDivElement>, index) => {
-  //   console.log("Drag End", index)
-  // }
-//   function handleDrag() {
-//     console.log("Dragging...")
-// }
+  const dragItem = useRef(null);
+  const dragOverItem = useRef(null);
+  
+  const handleSort = () => {
+    let _items = [...items];
+    const draggedItemContent=_items.splice(dragItem.current, 1)[0];
+    _items.splice(dragOverItem.current, 0, draggedItemContent)
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setItems(_items);
+  }
 
   return (
     <div className="container">
@@ -82,13 +78,11 @@ const WentWell = () => {
         <ul>
         {items.map((item, index) => {
           return (
-            <li key={`item-${index}`} draggable className="task swim-lane" 
-            // onDrag={DragStart} onDrop={DragOver} onDropCapture={insertAboveTask}
-            // onDrag={handleDrag}
-            // onDrag={DragandDrop} onDrop={DragandDrop}
-            // onDragStart={(e) => onDragStart(e, index)}
-            // onDragEnter={(e) => onDragEnter(e, index)}
-            // onDragEnd={onDragEnd}
+            <li key={`item-${index}`} draggable
+            onDragStart={(e) => dragItem.current=index}
+            onDragEnter={(e) => dragOverItem.current=index}
+            onDragEnd={() => handleSort(index)}
+            onDragOver={(e) => e.preventDefault()}
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
