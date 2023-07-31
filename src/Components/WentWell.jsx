@@ -78,7 +78,7 @@ const WentWell = () => {
         <ul>
         {items.map((item, index) => {
           return (
-            <li key={`item-${index}`} draggable
+            <li key={`item-${index}`} draggable droppable
             onDragStart={(e) => dragItem.current=index}
             onDragEnter={(e) => dragOverItem.current=index}
             onDragEnd={() => handleSort(index)}

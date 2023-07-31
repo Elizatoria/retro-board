@@ -1,6 +1,6 @@
 export const MoveLeft = (id, idx) => {
-  let newCards = [...this.state.Cards];
-  for (let card of newCards) {
+  let newItems = [...items];
+  for (let card of newItems) {
     if (card.id === id && card.type === "Went Well") {
       card.type = "Action Items";
     } else if (card.id === id && card.type === "To Improve") {
