@@ -1,73 +1,85 @@
-import React, {useState, useRef, useEffect} from 'react'
+const card = document.getElementById('card');
+const dropZone = document.getElementById('drop-zone');
+card.addEventListener('dragstart', function(event) {
+	console.log(event)
+})
+dropZone.addEventListener('dragover', function(event) {
+	event.preventDefault()
+})
+dropZone.addEventListener('drop', function(event) {
+	dropZone.prepend(card)
+})
 
-function DragNDrop({data}) {
+// import React, {useState, useRef, useEffect} from 'react'
 
-    const [list, setList] = useState(data); 
-    const [dragging, setDragging] = useState(false);
+// function DragNDrop({data}) {
 
-    useEffect(() => {
-        setList(data);
-    }, [setList, data])
+//     const [list, setList] = useState(data); 
+//     const [dragging, setDragging] = useState(false);
 
-    const dragItem = useRef();
-    const dragItemOver = useRef();
+//     useEffect(() => {
+//         setList(data);
+//     }, [setList, data])
+
+//     const dragItem = useRef();
+//     const dragItemOver = useRef();
     
-    const handletDragStart = (e, item) => {
-        console.log('Starting to drag', item)
+//     const handletDragStart = (e, item) => {
+//         console.log('Starting to drag', item)
 
-        dragItemOver.current = e.target;
-        dragItemOver.current.addEventListener('dragend', handleDragEnd)
-        dragItem.current = item;
+//         dragItemOver.current = e.target;
+//         dragItemOver.current.addEventListener('dragend', handleDragEnd)
+//         dragItem.current = item;
 
-        setTimeout(() => {
-            setDragging(true); 
-        },0)       
-    }
-    const handleDragEnter = (e, targetItem) => {
-        console.log('Entering a drag target', targetItem)
-        if (dragItemOver.current !== e.target) {
-            console.log('Target is NOT the same as dragged item')
-            setList(oldList => {
-                let newList = JSON.parse(JSON.stringify(oldList))
-                newList[targetItem.grpI].items.splice(targetItem.itemI, 0, newList[dragItem.current.grpI].items.splice(dragItem.current.itemI,1)[0])
-                dragItem.current = targetItem;
-                localStorage.setItem('List', JSON.stringify(newList));
-                return newList
-            })
-        }
-    }
-    const handleDragEnd = (e) => {
-        setDragging(false);
-        dragItem.current = null;
-        dragItemOver.current.removeEventListener('dragend', handleDragEnd)
-        dragItemOver.current = null;
-    }
-    const getStyles = (item) => {
-        if (dragItem.current.grpI === item.grpI && dragItem.current.itemI === item.itemI) {
-            return "dnd-item current"
-        }
-        return "dnd-item"
-    }
+//         setTimeout(() => {
+//             setDragging(true); 
+//         },0)       
+//     }
+//     const handleDragEnter = (e, targetItem) => {
+//         console.log('Entering a drag target', targetItem)
+//         if (dragItemOver.current !== e.target) {
+//             console.log('Target is NOT the same as dragged item')
+//             setList(oldList => {
+//                 let newList = JSON.parse(JSON.stringify(oldList))
+//                 newList[targetItem.grpI].items.splice(targetItem.itemI, 0, newList[dragItem.current.grpI].items.splice(dragItem.current.itemI,1)[0])
+//                 dragItem.current = targetItem;
+//                 localStorage.setItem('List', JSON.stringify(newList));
+//                 return newList
+//             })
+//         }
+//     }
+//     const handleDragEnd = (e) => {
+//         setDragging(false);
+//         dragItem.current = null;
+//         dragItemOver.current.removeEventListener('dragend', handleDragEnd)
+//         dragItemOver.current = null;
+//     }
+//     const getStyles = (item) => {
+//         if (dragItem.current.grpI === item.grpI && dragItem.current.itemI === item.itemI) {
+//             return "dnd-item current"
+//         }
+//         return "dnd-item"
+//     }
 
-    if (list) {
-        return (                
-            <div className="drag-n-drop">
-            {list.map((grp, grpI) => (
-              <div key={grp.title} onDragEnter={dragging && !grp.items.length?(e) => handleDragEnter(e,{grpI, itemI: 0}):null} className="dnd-group">
-                {grp.items.map((item, itemI) => (
-                  <div draggable key={item}  onDragStart={(e) => handletDragStart(e, {grpI, itemI})} onDragEnter={dragging?(e) => {handleDragEnter(e, {grpI, itemI})}:null} className={dragging?getStyles({grpI, itemI}):"dnd-item"}>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            ))}
-            </div>
-        )
-    } else { return null}
+//     if (list) {
+//         return (                
+//             <div className="drag-n-drop">
+//             {list.map((grp, grpI) => (
+//               <div key={grp.title} onDragEnter={dragging && !grp.items.length?(e) => handleDragEnter(e,{grpI, itemI: 0}):null} className="dnd-group">
+//                 {grp.items.map((item, itemI) => (
+//                   <div draggable key={item}  onDragStart={(e) => handletDragStart(e, {grpI, itemI})} onDragEnter={dragging?(e) => {handleDragEnter(e, {grpI, itemI})}:null} className={dragging?getStyles({grpI, itemI}):"dnd-item"}>
+//                     {item}
+//                   </div>
+//                 ))}
+//               </div>
+//             ))}
+//             </div>
+//         )
+//     } else { return null}
 
-}
+// }
 
-export default DragNDrop;
+// export default DragNDrop;
 
 // const DragAndDrop = () => {
 

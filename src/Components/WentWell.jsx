@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { Likes, Dislikes } from "./(Dis)likes";
+import MoveLeft from "./Move";
 
 
 const WentWell = () => {
@@ -78,7 +79,7 @@ const WentWell = () => {
         <ul>
         {items.map((item, index) => {
           return (
-            <li key={`item-${index}`} draggable droppable
+            <li key={`item-${index}`} draggable
             onDragStart={(e) => dragItem.current=index}
             onDragEnter={(e) => dragOverItem.current=index}
             onDragEnd={() => handleSort(index)}
@@ -86,7 +87,7 @@ const WentWell = () => {
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
-              <Likes /> <Dislikes />
+              <Likes /> <Dislikes /> <MoveLeft items={items} setItems={setItems} newItem={newItem} setNewItem={setNewItem} />
             </li>
           )
         }

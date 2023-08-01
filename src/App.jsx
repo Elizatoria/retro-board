@@ -15,18 +15,18 @@ function App() {
     </div>
 
 <div className="app">
-    <div className="box">
+    <div className="box well" droppable>
       <h2>Went Well</h2>
       <WentWell />
     </div>
 
-    <div className="box">
+    <div className="box improve" droppable>
       {/* <ToImprove /> */}
       <h2>To Improve</h2>
       <WentWell />
     </div>
 
-    <div className="box">
+    <div className="box action" droppable>
       {/* <ActionItems /> */}
       <h2>Action Items</h2>
       <WentWell />
