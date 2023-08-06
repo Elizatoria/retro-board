@@ -1,4 +1,4 @@
-const card = document.getElementById('card');
+const card = document.getElementById('task');
 const dropZone = document.getElementById('drop-zone');
 card.addEventListener('dragstart', function(event) {
 	console.log(event)

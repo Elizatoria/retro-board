@@ -1,11 +1,14 @@
-
 import "./App.css";
 
 import WentWell from "./Components/WentWell";
-// import ToImprove from "./Components/ToImprove";
+//import ToImprove from "./Components/ToImprove";
 // import ActionItems from "./Components/ActionItems";
 
+import { useState } from "react";
+
 function App() {
+  // Declare items and setItems here
+  const [items, setItems] = useState([]);
 
   return (
     <div className="container">
@@ -15,21 +18,24 @@ function App() {
     </div>
 
 <div className="app">
-    <div className="box well" droppable>
+    <div className="box well">
       <h2>Went Well</h2>
-      <WentWell />
+      {/* We need to pass items and setItems as a prop here */}
+      <WentWell items={items} setItems={setItems} label={1} />
     </div>
 
-    <div className="box improve" droppable>
+    <div className="box improve">
       {/* <ToImprove /> */}
       <h2>To Improve</h2>
-      <WentWell />
+      {/* We need to pass items and setItems as a prop here */}
+      <WentWell items={items} setItems={setItems} label={2} />
     </div>
 
-    <div className="box action" droppable>
+    <div className="box action">
       {/* <ActionItems /> */}
       <h2>Action Items</h2>
-      <WentWell />
+      {/* We need to pass items and setItems as a prop here */}
+      <WentWell items={items} setItems={setItems} label={3} />
     </div>
 </div>
     </div>

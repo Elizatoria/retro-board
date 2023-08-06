@@ -1,28 +1,30 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Likes, Dislikes } from "./(Dis)likes";
 import MoveLeft from "./Move";
 
 
-const WentWell = () => {
+const WentWell = (props) => {
  
   const [newItem, setNewItem] = useState("");
-  const [items, setItems] = useState([]);
+  //const [items, setItems] = useState([]);
   const [hasError, setHasError] = useState(false);
 
   const addToList = () => {
  
-    setItems([
-      ...items,
+    props.setItems([
+      ...props.items,
       {
         newItem,
+        label: props.label,
       },
     ]);
     setNewItem("");
+    console.log(props.items);
   };
 
   const deleteFromList = (indexToDelete) => {
-    setItems(
-      [...items].filter((_, index) => index !== indexToDelete)
+    props.setItems(
+      [...props.items].filter((_, index) => index !== indexToDelete)
     );
   };
 
@@ -35,17 +37,20 @@ const WentWell = () => {
     } else setHasError(true);
   };
 
-  const dragItem = useRef(null);
-  const dragOverItem = useRef(null);
-  
-  const handleSort = () => {
-    let _items = [...items];
-    const draggedItemContent=_items.splice(dragItem.current, 1)[0];
-    _items.splice(dragOverItem.current, 0, draggedItemContent)
-    dragItem.current = null;
-    dragOverItem.current = null;
-    setItems(_items);
-  }
+  // const dragItem = useRef(null);
+  // const dragOverItem = useRef(null);
+
+  // const handleSort = () => {
+  //   let _items = [...items];
+  //   const draggedItemContent=_items.splice(dragItem.current, 1)[0];
+  //   _items.splice(dragOverItem.current, 0, draggedItemContent)
+  //   dragItem.current = null;
+  //   dragOverItem.current = null;
+  //   setItems(_items);
+  // }
+
+  //That was for the drag and drop
+  //I comment them all out
 
   return (
     <div className="container">
@@ -77,17 +82,24 @@ const WentWell = () => {
       </div>
       <div className="card card-body border-white">
         <ul>
-        {items.map((item, index) => {
+        {props.items.filter((item) => {
+           if (item.label === props.label) {
+            return true;
+          } else return false;
+        })
+        .map((item, index) => {
           return (
-            <li key={`item-${index}`} draggable
-            onDragStart={(e) => dragItem.current=index}
-            onDragEnter={(e) => dragOverItem.current=index}
-            onDragEnd={() => handleSort(index)}
-            onDragOver={(e) => e.preventDefault()}
+            <li key={`item-${index}`} className="well improve action"
+            // draggable
+            // onDragStart={(e) => dragItem.current=index}
+            // onDragEnter={(e) => dragOverItem.current=index}
+            // onDragEnd={() => handleSort(index)} This is the only place Handlesort is being used
+            // onDragOver={(e) => e.preventDefault()}
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
-              <Likes /> <Dislikes /> <MoveLeft items={items} setItems={setItems} newItem={newItem} setNewItem={setNewItem} />
+              <Likes /> <Dislikes /> 
+              <MoveLeft items={props.items} setItems={props.setItems} newItem={newItem} setNewItem={setNewItem} />
             </li>
           )
         }

@@ -1,23 +1,28 @@
 function MoveLeft(props) {
-if (`item-${props.index}` && props.className === "well") {
-      props.className = "action";
-    } else if (`item-${props.index}` && props.className === "improve") {
-      props.className = "well";
-    } else if (`item-${props.index}` && props.className === "action") {
-      props.className = "improve";
-    }
- props.items.push(props.items[props.index]);
-  props.setItems(props.newItems);
-
-  return (
-    <button
-onClick={() => {
-  MoveLeft(props);
-}}
->Move Left</button>
-  )
+  return <button>Move</button>
 }
 export default MoveLeft;
+// if (`item-${props.index}` && props.className === "well") {
+//       props.className = "action";
+//     } else if (`item-${props.index}` && props.className === "improve") {
+//       props.className = "well";
+//     } else if (`item-${props.index}` && props.className === "action") {
+//       props.className = "improve";
+//     }
+//  props.items.push(props.items[props.index]);
+//   //props.setItems(props.newItems);
+
+//   return (
+//     <button
+// onClick={() => {
+//   MoveLeft(props); 
+  //That supposed to move the thing left when clicking the button
+  //I just realized that I have been calling classnames from App, but I tried adding them to the thing, but that didn't work
+// }}
+// >Move Left</button>
+//   )
+// }
+
 
 // if (item && cost) {
 //   const row = { item: item, cost: cost};

@@ -1,27 +1,29 @@
 import { useState } from "react";
-
 import { Likes, Dislikes } from "./(Dis)likes";
+import MoveLeft from "./Move";
 
-const ToImprove = () => {
+
+const WentWell = (props) => {
  
   const [newItem, setNewItem] = useState("");
-  const [items, setItems] = useState([]);
+  //const [items, setItems] = useState([]);
   const [hasError, setHasError] = useState(false);
-
+console.log(props.items, props.label);
   const addToList = () => {
  
-    setItems([
-      ...items,
+    props.setItems([
+      ...props.items,
       {
         newItem,
       },
     ]);
     setNewItem("");
+    console.log(props.items);
   };
 
   const deleteFromList = (indexToDelete) => {
-    setItems(
-      [...items].filter((_, index) => index !== indexToDelete)
+    props.setItems(
+      [...props.items].filter((_, index) => index !== indexToDelete)
     );
   };
 
@@ -34,12 +36,26 @@ const ToImprove = () => {
     } else setHasError(true);
   };
 
+  // const dragItem = useRef(null);
+  // const dragOverItem = useRef(null);
+
+  // const handleSort = () => {
+  //   let _items = [...items];
+  //   const draggedItemContent=_items.splice(dragItem.current, 1)[0];
+  //   _items.splice(dragOverItem.current, 0, draggedItemContent)
+  //   dragItem.current = null;
+  //   dragOverItem.current = null;
+  //   setItems(_items);
+  // }
+
+  //That was for the drag and drop
+  //I comment them all out
+
   return (
     <div className="container">
       <div className="card card-body bg-light mb-2">
         <form method="POST" className="row g-3" onSubmit={handleSubmit}>
           <div className="col">
-          <h2 className="h4">To Improve</h2>
             <input
               className={
                 hasError && !newItem ? "is-invalid form-control" : "form-control"
@@ -52,7 +68,7 @@ const ToImprove = () => {
             />
             {hasError && !newItem && (
               <div className="invalid-feedback">
-                Please enter a Task
+                Please enter a Text
               </div>
             )}
             
@@ -65,12 +81,20 @@ const ToImprove = () => {
       </div>
       <div className="card card-body border-white">
         <ul>
-        {items.map((item, index) => {
+        {props.items.map((item, index) => {
+          console.log(item)
           return (
-            <li key={`item-${index}`}>
+            <li key={`item-${index}`} className="well improve action"
+            // draggable
+            // onDragStart={(e) => dragItem.current=index}
+            // onDragEnter={(e) => dragOverItem.current=index}
+            // onDragEnd={() => handleSort(index)} This is the only place Handlesort is being used
+            // onDragOver={(e) => e.preventDefault()}
+            >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
-              <Likes /> <Dislikes />
+              <Likes /> <Dislikes /> 
+              <MoveLeft items={props.items} setItems={props.setItems} newItem={newItem} setNewItem={setNewItem} />
             </li>
           )
         }
@@ -81,4 +105,4 @@ const ToImprove = () => {
   );
 };
 
-export default ToImprove;
+export default WentWell;
