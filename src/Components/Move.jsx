@@ -1,5 +1,17 @@
 function MoveLeft(props) {
-  return <button>Move</button>
+  if (`item-${props.index}` && props.label === 1) {
+      props.label = 2;
+    } else if (`item-${props.index}` && props.label === 2) {
+      props.label = 3;
+    } else if (`item-${props.index}` && props.label === 3) {
+      props.label = 1;
+    }
+
+    props.items.push(props.items[props.index]);
+    
+  return (
+  <button onClick={() => MoveLeft(props)}>MoveLeft</button>
+  )
 }
 export default MoveLeft;
 // if (`item-${props.index}` && props.className === "well") {
@@ -16,8 +28,6 @@ export default MoveLeft;
 //     <button
 // onClick={() => {
 //   MoveLeft(props); 
-  //That supposed to move the thing left when clicking the button
-  //I just realized that I have been calling classnames from App, but I tried adding them to the thing, but that didn't work
 // }}
 // >Move Left</button>
 //   )

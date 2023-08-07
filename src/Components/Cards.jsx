@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { Likes, Dislikes } from "./(Dis)likes";
-import MoveLeft from "./Move";
+//import MoveLeft from "./Move";
 
 
-const WentWell = (props) => {
+const Cards = (props) => {
  
   const [newItem, setNewItem] = useState("");
-  //const [items, setItems] = useState([]);
   const [hasError, setHasError] = useState(false);
-console.log(props.items, props.label);
+
   const addToList = () => {
  
     props.setItems([
       ...props.items,
       {
         newItem,
+        label: props.label,
       },
     ]);
     setNewItem("");
@@ -48,8 +48,21 @@ console.log(props.items, props.label);
   //   setItems(_items);
   // }
 
-  //That was for the drag and drop
-  //I comment them all out
+  const MoveLeft = (indexToMove) => {
+    if (props.items.indexToMove && newItem.label === 1) {
+        newItem.label = 2;
+      } else if (props.items.indexToMove && newItem.label === 2) {
+        newItem.label = 3;
+      } else if (props.items.indexToMove && newItem.label === 3) {
+        newItem.label = 1;
+      }
+console.log(newItem.label);
+      // newItem.push(newItem[indexToMove]);
+      
+    return (
+    <button onClick={() => MoveLeft(indexToMove)}>MoveLeft</button>
+    )
+  }
 
   return (
     <div className="container">
@@ -81,8 +94,12 @@ console.log(props.items, props.label);
       </div>
       <div className="card card-body border-white">
         <ul>
-        {props.items.map((item, index) => {
-          console.log(item)
+        {props.items.filter((item) => {
+           if (item.label === props.label) {
+            return true;
+          } else return false;
+        })
+        .map((item, index) => {
           return (
             <li key={`item-${index}`} className="well improve action"
             // draggable
@@ -93,8 +110,8 @@ console.log(props.items, props.label);
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
-              <Likes /> <Dislikes /> 
-              <MoveLeft items={props.items} setItems={props.setItems} newItem={newItem} setNewItem={setNewItem} />
+              <Likes /> <Dislikes /> <MoveLeft />
+              {/* <MoveLeft items={props.items} setItems={props.setItems} newItem={newItem} setNewItem={setNewItem} /> */}
             </li>
           )
         }
@@ -105,4 +122,4 @@ console.log(props.items, props.label);
   );
 };
 
-export default WentWell;
+export default Cards;

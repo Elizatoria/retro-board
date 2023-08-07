@@ -1,9 +1,5 @@
 import "./App.css";
-
-import WentWell from "./Components/WentWell";
-//import ToImprove from "./Components/ToImprove";
-// import ActionItems from "./Components/ActionItems";
-
+import Cards from "./Components/Cards";
 import { useState } from "react";
 
 function App() {
@@ -21,21 +17,21 @@ function App() {
     <div className="box well">
       <h2>Went Well</h2>
       {/* We need to pass items and setItems as a prop here */}
-      <WentWell items={items} setItems={setItems} label={1} />
+      <Cards items={items} setItems={setItems} label={1} />
     </div>
 
     <div className="box improve">
       {/* <ToImprove /> */}
       <h2>To Improve</h2>
       {/* We need to pass items and setItems as a prop here */}
-      <WentWell items={items} setItems={setItems} label={2} />
+      <Cards items={items} setItems={setItems} label={2} />
     </div>
 
     <div className="box action">
       {/* <ActionItems /> */}
       <h2>Action Items</h2>
       {/* We need to pass items and setItems as a prop here */}
-      <WentWell items={items} setItems={setItems} label={3} />
+      <Cards items={items} setItems={setItems} label={3} />
     </div>
 </div>
     </div>
