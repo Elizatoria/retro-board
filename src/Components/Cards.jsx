@@ -18,7 +18,6 @@ const Cards = (props) => {
       },
     ]);
     setNewItem("");
-    console.log(props.items);
   };
 
   const deleteFromList = (indexToDelete) => {
@@ -49,14 +48,14 @@ const Cards = (props) => {
   // }
 
   const MoveLeft = (indexToMove) => {
-    if (props.items.indexToMove && newItem.label === 1) {
+    if (newItem.index === props.items.indexToMove && newItem.label === 1) {
         newItem.label = 2;
-      } else if (props.items.indexToMove && newItem.label === 2) {
+      } else if (newItem.index === props.items.indexToMove && newItem.label === 2) {
         newItem.label = 3;
-      } else if (props.items.indexToMove && newItem.label === 3) {
+      } else if (newItem.index === props.items.indexToMove && newItem.label === 3) {
         newItem.label = 1;
       }
-console.log(newItem.label);
+console.log(newItem.index);
       // newItem.push(newItem[indexToMove]);
       
     return (
