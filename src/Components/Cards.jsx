@@ -47,21 +47,42 @@ const Cards = (props) => {
   //   setItems(_items);
   // }
 
-  const MoveLeft = (indexToMove) => {
-    if (newItem.index === props.items.indexToMove && newItem.label === 1) {
-        newItem.label = 2;
-      } else if (newItem.index === props.items.indexToMove && newItem.label === 2) {
-        newItem.label = 3;
-      } else if (newItem.index === props.items.indexToMove && newItem.label === 3) {
-        newItem.label = 1;
-      }
-console.log(newItem.index);
-      // newItem.push(newItem[indexToMove]);
+//   const MoveLeft = (indexToMove) => {
+//     if (newItem.index === props.items.indexToMove &&  props.items.label === 1) {
+//       props.items.label = 2;
+//       } else if (newItem.index === props.items.indexToMove &&  props.items.label === 2) {
+//         props.items.label = 3;
+//       } else if (newItem.index === props.items.indexToMove &&  props.items.label === 3) {
+//         props.items.label = 1;
+//       }
+// console.log( props.items.label);
+//       // newItem.push(newItem[indexToMove]);
       
-    return (
-    <button onClick={() => MoveLeft(indexToMove)}>MoveLeft</button>
-    )
-  }
+//     return (
+//     <button onClick={() => MoveLeft(indexToMove)}>MoveLeft</button>
+//     )
+//   }
+
+function MoveLeft() {
+  const [label, setLabel] = useState(props.label);
+
+  const changeLabel = () => {
+    if (label === 1) {
+            setLabel(2);
+            } else if (label === 2) {
+              setLabel(3);
+            } else if (label === 3) {
+              setLabel(1);
+            }
+  };
+
+  return (
+    <div>
+      <h1>{label}</h1>
+      <button onClick={changeLabel}>Change Label</button>
+    </div>
+  );
+}
 
   return (
     <div className="container">
