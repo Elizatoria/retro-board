@@ -122,16 +122,10 @@ function MoveLeft() {
         .map((item, index) => {
           return (
             <li key={`item-${index}`} className="well improve action"
-            // draggable
-            // onDragStart={(e) => dragItem.current=index}
-            // onDragEnter={(e) => dragOverItem.current=index}
-            // onDragEnd={() => handleSort(index)} This is the only place Handlesort is being used
-            // onDragOver={(e) => e.preventDefault()}
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
               <Likes /> <Dislikes /> <MoveLeft />
-              {/* <MoveLeft items={props.items} setItems={props.setItems} newItem={newItem} setNewItem={setNewItem} /> */}
             </li>
           )
         }
