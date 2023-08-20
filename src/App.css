@@ -8,20 +8,25 @@
 .box {
   margin: 10px;
   border: solid;
+  background-color: lightsteelblue;
 }
 
 h1 {
   text-align: center;
+  background-color: lightslategray;
 }
 
 h2 {
   text-align: center;
 }
 
-ul {
-  list-style: none;
+dt {
+  border: solid;
+  background-color: thistle;
 }
 
-li {
-  border: solid;
+body {
+  background-image: url(https://images.unsplash.com/photo-1595094616578-b99ad9b5f38d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80);
+  background-position: center;
+  background-size: cover;
 }

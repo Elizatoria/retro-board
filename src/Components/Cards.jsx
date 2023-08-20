@@ -38,7 +38,7 @@ const Cards = (props) => {
     } else setHasError(true);
   };
 
-const MoveRight = (item) => {
+const MoveLeft = (item) => {
   if (item.label === 3) {
     item.label = 2;
   } else if (item.label === 2) {
@@ -59,7 +59,7 @@ const MoveRight = (item) => {
   console.log(props.items);
 }
 
-function MoveLeft(item) {
+function MoveRight(item) {
   if (item.label === 1) {
     item.label = 2;
   } else if (item.label === 2) {
@@ -109,7 +109,7 @@ function MoveLeft(item) {
         </form>
       </div>
       <div className="card card-body border-white">
-        <ul>
+        <dl>
         {props.items.filter((item) => {
            if (item.label === props.label) {
             return true;
@@ -117,18 +117,18 @@ function MoveLeft(item) {
         })
         .map((item, index) => {
           return (
-            <li key={`item-${index}`}
+            <dt key={`item-${index}`}
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
               <Likes /> <Dislikes />
-              <button onClick={() => MoveRight(item)}>MoveRight</button>
-              <button onClick={() => MoveLeft(item)}>MoveLeft</button>
-            </li>
+              <button onClick={() => MoveLeft(item)}>Left⬅️</button>
+              <button onClick={() => MoveRight(item)}>Right➡️</button>
+            </dt>
           )
         }
           )}
-      </ul>
+      </dl>
       </div>
     </div>
   );
