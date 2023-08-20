@@ -7,10 +7,11 @@ const Cards = (props) => {
   const [newItem, setNewItem] = useState("");
   const [hasError, setHasError] = useState(false);
 
+  //Function to Add Items to List
   const addToList = () => {
 
     let itemPlace = props.items[props.items.length - 1];
-    if (itemPlace === undefined) {itemPlace = { idNum: 0 }} 
+    if (itemPlace === undefined) {itemPlace = { idNum: 0 }};
  
     props.setItems([
       ...props.items,
@@ -23,12 +24,14 @@ const Cards = (props) => {
     setNewItem("");
   };
 
+  //Function to Delete Items from the List
   const deleteFromList = (indexToDelete) => {
     props.setItems(
       [...props.items].filter((_, index) => index !== indexToDelete)
     );
   };
 
+  //Function to Validate Text in Input
   const handleSubmit = (e) => {
     e.preventDefault();
    
@@ -38,6 +41,7 @@ const Cards = (props) => {
     } else setHasError(true);
   };
 
+//Left Arrow Button Function
 const MoveLeft = (item) => {
   if (item.label === 3) {
     item.label = 2;
@@ -59,6 +63,7 @@ const MoveLeft = (item) => {
   console.log(props.items);
 }
 
+//Right Arrow Button Function
 function MoveRight(item) {
   if (item.label === 1) {
     item.label = 2;
@@ -109,6 +114,7 @@ function MoveRight(item) {
         </form>
       </div>
       <div className="card card-body border-white">
+        {/*Used Description Lists instead of Ordered or Unordered Lists because the last two leave a space at the front of the item*/}
         <dl>
         {props.items.filter((item) => {
            if (item.label === props.label) {

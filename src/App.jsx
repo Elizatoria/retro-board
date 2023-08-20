@@ -21,14 +21,12 @@ function App() {
     </div>
 
     <div className="box improve">
-      {/* <ToImprove /> */}
       <h2>To Improve</h2>
       {/* We need to pass items and setItems as a prop here */}
       <Cards items={items} setItems={setItems} label={2} />
     </div>
 
     <div className="box action">
-      {/* <ActionItems /> */}
       <h2>Action Items</h2>
       {/* We need to pass items and setItems as a prop here */}
       <Cards items={items} setItems={setItems} label={3} />
