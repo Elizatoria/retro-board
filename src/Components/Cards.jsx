@@ -60,7 +60,6 @@ const MoveLeft = (item) => {
       item,
   ]);
   ;
-  console.log(props.items);
 }
 
 //Right Arrow Button Function
@@ -82,7 +81,6 @@ function MoveRight(item) {
       item,
   ]);
   ;
-  console.log(props.items);
 }
 
   return (
