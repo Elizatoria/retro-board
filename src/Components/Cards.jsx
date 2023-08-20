@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Likes, Dislikes } from "./(Dis)likes";
-//import MoveLeft from "./Move";
 
 
 const Cards = (props) => {
@@ -9,12 +8,16 @@ const Cards = (props) => {
   const [hasError, setHasError] = useState(false);
 
   const addToList = () => {
+
+    let itemPlace = props.items[props.items.length - 1];
+    if (itemPlace === undefined) {itemPlace = { idNum: 0 }} 
  
     props.setItems([
       ...props.items,
       {
         newItem,
         label: props.label,
+        idNum: itemPlace.idNum + 1,
       },
     ]);
     setNewItem("");
@@ -35,53 +38,46 @@ const Cards = (props) => {
     } else setHasError(true);
   };
 
-  // const dragItem = useRef(null);
-  // const dragOverItem = useRef(null);
+const MoveRight = (item) => {
+  if (item.label === 3) {
+    item.label = 2;
+  } else if (item.label === 2) {
+    item.label = 1;
+  } else if (item.label === 1) {
+    item.label = 3;
+  }
 
-  // const handleSort = () => {
-  //   let _items = [...items];
-  //   const draggedItemContent=_items.splice(dragItem.current, 1)[0];
-  //   _items.splice(dragOverItem.current, 0, draggedItemContent)
-  //   dragItem.current = null;
-  //   dragOverItem.current = null;
-  //   setItems(_items);
-  // }
+  const newItem = props.items.filter((targetObj, _) => {
+    return targetObj.idNum !== item.idNum;
+  });
 
-//   const MoveLeft = (indexToMove) => {
-//     if (newItem.index === props.items.indexToMove &&  props.items.label === 1) {
-//       props.items.label = 2;
-//       } else if (newItem.index === props.items.indexToMove &&  props.items.label === 2) {
-//         props.items.label = 3;
-//       } else if (newItem.index === props.items.indexToMove &&  props.items.label === 3) {
-//         props.items.label = 1;
-//       }
-// console.log( props.items.label);
-//       // newItem.push(newItem[indexToMove]);
-      
-//     return (
-//     <button onClick={() => MoveLeft(indexToMove)}>MoveLeft</button>
-//     )
-//   }
+  props.setItems([
+    ...newItem,
+      item,
+  ]);
+  ;
+  console.log(props.items);
+}
 
-function MoveLeft() {
-  const [label, setLabel] = useState(props.label);
+function MoveLeft(item) {
+  if (item.label === 1) {
+    item.label = 2;
+  } else if (item.label === 2) {
+    item.label = 3;
+  } else if (item.label === 3) {
+    item.label = 1;
+  }
 
-  const changeLabel = () => {
-    if (label === 1) {
-            setLabel(2);
-            } else if (label === 2) {
-              setLabel(3);
-            } else if (label === 3) {
-              setLabel(1);
-            }
-  };
+  const newItem = props.items.filter((targetObj, _) => {
+    return targetObj.idNum !== item.idNum;
+  });
 
-  return (
-    <div>
-      <h1>{label}</h1>
-      <button onClick={changeLabel}>Change Label</button>
-    </div>
-  );
+  props.setItems([
+    ...newItem,
+      item,
+  ]);
+  ;
+  console.log(props.items);
 }
 
   return (
@@ -121,11 +117,13 @@ function MoveLeft() {
         })
         .map((item, index) => {
           return (
-            <li key={`item-${index}`} className="well improve action"
+            <li key={`item-${index}`}
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
-              <Likes /> <Dislikes /> <MoveLeft />
+              <Likes /> <Dislikes />
+              <button onClick={() => MoveRight(item)}>MoveRight</button>
+              <button onClick={() => MoveLeft(item)}>MoveLeft</button>
             </li>
           )
         }
