@@ -100,7 +100,7 @@ function MoveRight(item) {
             />
             {hasError && !newItem && (
               <div className="invalid-feedback">
-                Please enter a Text
+                Please enter Text
               </div>
             )}
             
