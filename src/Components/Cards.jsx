@@ -19,6 +19,8 @@ const Cards = (props) => {
         newItem,
         label: props.label,
         idNum: itemPlace.idNum + 1,
+        likes: props.likes,
+        dislikes: props.dislikes,
       },
     ]);
     setNewItem("");
@@ -100,7 +102,7 @@ function MoveRight(item) {
             />
             {hasError && !newItem && (
               <div className="invalid-feedback">
-                Please enter Text
+                Please Enter Text
               </div>
             )}
             
@@ -125,7 +127,8 @@ function MoveRight(item) {
             >
               {item.newItem} 
               <button onClick={() => deleteFromList(index)}>❌</button>
-              <Likes /> <Dislikes />
+              <Likes likes={props.likes} setLikes={props.setLikes} /> 
+              <Dislikes dislikes={props.dislikes} setDislikes={props.setDislikes} />
               <button onClick={() => MoveLeft(item)}>Left⬅️</button>
               <button onClick={() => MoveRight(item)}>Right➡️</button>
             </dt>
